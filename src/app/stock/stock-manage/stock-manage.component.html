@@ -1,0 +1,52 @@
+<div class="box">
+  <div class="box-header with-border">
+    <a class="btn btn-success btn-sm" (click)="create()"><span class="glyphicon glyphicon-plus"></span>创建</a>
+    <div class="box-tools">
+      <div class="input-group input-group-sm" style="width: 150px;margin-top:6px;">
+        <!--input输入块已经与后台类型为formControl的属性"nameFilter"绑定到一起了，
+        当input输入值的时候"nameFilter"会发射valueChanges事件。然后去后台捕获这个数据进行操作即可实现实时搜索功能。-->
+        <input [formControl]="nameFilter" type="text" name="table_search" class="form-control pull-right" placeholder="股票名称">
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table class="table table-bordered">
+      <tr>
+        <th style="width: 10px">#</th>
+        <th>股票名称</th>
+        <th>股票价格</th>
+        <th>股票评级</th>
+        <th>操作</th>
+      </tr>
+      <tr *ngFor="let stock of stocks | stockFilter:'name':keywork; let i = index;"><!--angular的内置指令*ngFor使用for循环，;它用来循环一个可迭代的对象,一般情况下会是一个数组。
+      这里的*是不能够去掉的;如果去掉的话那么我们的程序不会报错,但是我们只循环出来了数组的第一项。let 变量 of 循环对象，用变量盛放循环对象中遍历出来的值-->
+        <td>{{i+1}}</td>
+        <td>{{stock.name}}</td>
+        <td>{{stock.price}}</td>
+        <td>
+          <app-stars [rating]="stock.rating"></app-stars>
+        </td><!--当前的stock的rating属性传递给stars.ts组件的ngOnInit方法-->
+        <td>
+          <a class="btn btn-warning btn-xs" (click)="update(stock)"><span class="glyphicon glyphicon-pencil"></span>修改</a>
+          <a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>删除</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
+      <li><a href="#">&laquo;</a></li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">&raquo;</a></li>
+    </ul>
+  </div>
+</div>
+
+

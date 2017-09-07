@@ -1,0 +1,4 @@
+<span *ngFor="let star of stars;let i = index;" class="glyphicon glyphicon-star"
+      [class.glyphicon-star-empty]="star" (click)="clickStar(i)"></span><!--依据starts数组里是true还是false显示实星与空星，这里用到了angular
+      的样式绑定即：[class.glyphicon-star-empty]="star"；当star为true的时候在<span>标签上会多".glyphicon-star-empty"
+      这样一个样式,若为false就不会有这样的样式。index是angular的ngfor循环内置的变量它记录了当前循环的下标。第一次循环是0后面以此类推。-->
